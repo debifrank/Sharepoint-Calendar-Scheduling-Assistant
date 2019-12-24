@@ -1,0 +1,36 @@
+﻿@model  IOrderedEnumerable<ContinentalApplication.Models.Investigator>
+@{
+    ViewBag.Title = "Investigators";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card-available {
+        background-color: #dfffcf;
+    }
+
+    .card-may-be-available {
+        background-color: #fffecc;
+    }
+
+    .card-unavailable {
+        background-color: #ffd1cc;
+    }
+</style>
+
+@foreach (var employee in Model)
+{
+    <div class="card m-2 mx-xl-auto @employee.Status" style="min-width: 344px; max-width: 1140px;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-auto">
+                    <h5 class="card-title">@employee.Name</h5>
+                </div>
+                <div class="col text-right">
+                    <a href="tel:@employee.Number" class="btn btn-dark"><i class="fa fa-phone"></i></a>
+                    <a href="@Url.Action("InvestigatorCalendar", "Calendar", new { name = employee.Name, month = DateTime.Now.Month })" class="btn btn-dark"><i class="fa fa-calendar"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,91 @@
+﻿@model  ContinentalApplication.Models.Calendar
+@{
+    ViewBag.Title = "InvestigatorCalendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@Model.Investigator</h2>
+    <h3>@Model.Month - @Model.Year</h3>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr class="d-flex">
+                <th style="text-align:center;width:14%">Mon</th>
+                <th style="text-align:center;width:14%">Tue</th>
+                <th style="text-align:center;width:14%">Wed</th>
+                <th style="text-align:center;width:14%">Thu</th>
+                <th style="text-align:center;width:14%">Fri</th>
+                <th style="text-align:center;width:14%">Sat</th>
+                <th style="text-align:center;width:14%">Sun</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            int endOfWeek = 7;
+            int offset=0;
+            for (int j = 0; j < 5; j++)
+            {
+                <tr class="d-flex">
+                @if (j == 0)
+                {
+                    if (Model.FirstDay == "Monday")
+                    {
+                        // do nothing, calendar starts on Monday
+                    }
+                    else if (Model.FirstDay == "Tuesday")
+                    {
+                        endOfWeek = 6;
+                    }
+                    else if (Model.FirstDay == "Wednesday")
+                    {
+                        endOfWeek = 5;
+                    }
+                    else if (Model.FirstDay == "Thursday")
+                    {
+                        endOfWeek = 4;
+                    }
+                    else if (Model.FirstDay == "Friday")
+                    {
+                        endOfWeek = 3;
+                    }
+                    else if (Model.FirstDay == "Saturday")
+                    {
+                        endOfWeek = 2;
+                    }
+                    else // Sunday
+                    {
+                        endOfWeek = 1;
+                    }
+                    offset = 7 - endOfWeek;
+                    for(int k = offset; k > 0; k--)
+                    {
+                        <td style="width:14%;text-align:center;"></td>
+                    }
+                }
+                else { endOfWeek = 7; }
+                @for (int i = 0; i < endOfWeek; i++) {
+                    int dayNum = 0;
+                    if (j>0 && offset != 0)
+                    {
+                        dayNum = (i + 1) + (j * 7) - offset;
+                    }
+                    else { dayNum = (i + 1) + (j * 7); }
+                    if(j == 0)
+                    {
+                    }
+                    if (dayNum <= Model.Days)
+                    {
+                        int percent = Model.BusyDays.ElementAt(dayNum-1)*100;
+                        <td style="width:14%;text-align:center;">@dayNum<div class="progress"><div class="progress-bar" style="width:@percent%"></div></div></td>
+                    }
+                    else
+                    {
+
+                    }
+                }
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>

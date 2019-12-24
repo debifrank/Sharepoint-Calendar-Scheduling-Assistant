@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Current = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+html, body {
+    height: 100%;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+</style>
+
+<form class="form-signin">
+    <img class="mb-4 w-100" src="~/Content/images/continental-aerospace-technologies.png">
+    <h1 class="h3 mb-5 font-weight-normal text-center">Accident Investigator Scheduling Application</h1>
+    @Html.ActionLink("Sign In", "SignIn", "Account", new { area = "" }, new { @class = "btn btn-lg btn-primary btn-block text-center" })
+    <p class="mt-3 mb-3 text-muted text-center">© Copyright 2019.</p>
+</form>
